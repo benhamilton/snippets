@@ -30,4 +30,10 @@ The article it links to states:
 > The license is the same. You do not need a new Product Key. 
 > If you have any questions, contact Microsoft Support.
 
+HeiDoc.net provides download links to Microsoft Office:
 
+   * Download [Microsoft Office 2010 links](http://www.heidoc.net/joomla/technology-science/microsoft/18-office-2010-direct-download-links)
+   * Download [Microsoft Office 2013 links](http://www.heidoc.net/joomla/technology-science/microsoft/73-office-2013-direct-download-links)
+ 
+ 
+ 
