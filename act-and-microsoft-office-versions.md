@@ -1,8 +1,11 @@
-**Microsoft Office Click to Run vs MSI based installation**
+**What Versions of Act! Work With Which Versions of Microsoft Office**
 
-Act! will not integrate with the Click to Run (CTR) versions of Microsoft Office. Refer to [Act! Knowledge Base article 29499 for more details](http://kb.swiftpage.com/app/answers/detail/a_id/29499/).
+
+Refer to [Act! Knowledge Base article 29499 for the official list of which Act! versions work with which Microsoft Office versions](http://kb.swiftpage.com/app/answers/detail/a_id/29499/).
 
 In short, you need to install Office from the full download, not the Click to Run method.
+
+Act! will not integrate with the Click to Run (CTR) versions of Microsoft Office. 
 
 Per this [Microsoft Knowledge Base article](http://office.microsoft.com/en-au/excel-help/click-to-run-known-issues-HA101850565.aspx?CTT=1) which applies to 2013 and 2010 versions of Word/Excel/Outlook, Microsoft have, with CTR, changed how an add-on is able to interact with MSO. 
 
