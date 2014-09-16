@@ -48,10 +48,7 @@ where
 	and u.user_name = 'john.doe'
 	order by c_a.date_created asc;
 /*
-	#future - yet to all all the c_a.data_type values into the case statements
-	#future - add code to show the team names
-	
-	Tag #timezone #tz #utc #gmt #case 
+	Tags #timezone #tz #utc #gmt #case 
 */
 
 	
