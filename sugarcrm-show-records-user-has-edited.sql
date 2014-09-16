@@ -36,7 +36,7 @@ select
 		when 'text' then c_a.after_value_text 
 		when 'tinyint' then c_a.after_value_string
 		when 'url' then c_a.after_value_string
-		when 'varchar' then c_a.after_value_text 
+		when 'varchar' then c_a.after_value_string 
 	ELSE c_a.before_value_string END as 'After Value'
 from 
 	contacts_audit c_a 
