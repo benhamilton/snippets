@@ -9,28 +9,34 @@ select
 	case c.deleted WHEN '0' THEN (concat_ws(' ',c.first_name,c.last_name)) WHEN '1' THEN (concat_ws(' ',c.first_name,c.last_name,' (deleted)')) ELSE NULL END as 'Contact Record Edited',
 	c_a.field_name as 'Field Name',
 	case c_a.data_type 
-		when 'varchar' then c_a.before_value_string 
-		when 'date' then c_a.before_value_string 
-		when 'enum' then c_a.before_value_string 
-		when 'team_list' then c_a.before_value_string
-		when 'id' then c_a.before_value_string
-		when 'url' then c_a.before_value_string
 		when 'bool' then c_a.before_value_string
-		when 'phone' then c_a.before_value_string
+		when 'date' then c_a.before_value_string 
+		when 'datetime' then c_a.before_value_string 
+		when 'enum' then c_a.before_value_string 
+		when 'id' then c_a.before_value_string
+		when 'int' then c_a.before_value_string 
 		when 'multienum' then c_a.before_value_string
+		when 'phone' then c_a.before_value_string
+		when 'team_list' then c_a.before_value_string
 		when 'text' then c_a.before_value_text 
+		when 'tinyint' then c_a.before_value_string 
+		when 'url' then c_a.before_value_string
+		when 'varchar' then c_a.before_value_string
 	ELSE c_a.before_value_string END as 'Before Value',
 	case c_a.data_type 
-		when 'varchar' then c_a.after_value_string 
+		when 'bool' then c_a.after_value_string 
 		when 'date' then c_a.after_value_string 
+		when 'datetime' then c_a.after_value_string 
 		when 'enum' then c_a.after_value_string 
+		when 'id' then c_a.after_value_string 
+		when 'int' then c_a.after_value_string 
+		when 'multienum' then c_a.after_value_string 
+		when 'phone' then c_a.after_value_string 
 		when 'team_list' then c_a.after_value_string
-		when 'id' then c_a.after_value_string
-		when 'url' then c_a.after_value_string
-		when 'bool' then c_a.after_value_string
-		when 'phone' then c_a.after_value_string
-		when 'multienum' then c_a.after_value_string
 		when 'text' then c_a.after_value_text 
+		when 'tinyint' then c_a.after_value_string
+		when 'url' then c_a.after_value_string
+		when 'varchar' then c_a.after_value_text 
 	ELSE c_a.before_value_string END as 'After Value'
 from 
 	contacts_audit c_a 
