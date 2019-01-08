@@ -1,5 +1,8 @@
+/*
+  SugarCRM - create a user activity report
+*/
 SET
-	@USERNAME = 'Ben Hamilton',
+	@USERNAME = 'Ben Hamilton', /* set to '%' for all users */
 	@STARTDATE = concat(date_add(curdate(), interval -1 day),' 00:00:00'),
 	@ENDDATE = concat(curdate(),' 23:59:59'),
 	@TZ = '+10:00';
