@@ -23,3 +23,30 @@ ssh user@1.1.1.1 -p 22 -i ~/.ssh/privatekeyfilenamehere
 ```
 
 tags: #mysql #ssh #iterm #port #publickey #privatekey
+
+To connect to local MySQL database do:
+
+```
+mysql -u USERNAME -p
+```
+You will be prompted for the password, type it in and press enter
+
+```
+show databases;
+```
+
+```
+use DATABASENAME;
+```
+
+Then you can run your queries
+```
+select * from contacts;
+```
+
+To remove all rows from a table in MySQL, you can use the truncate command, which is similar to doing a drop table and create table, but quicker and less risky, although there is no undo:
+
+```
+TRUNCATE tbl_name
+```
+
