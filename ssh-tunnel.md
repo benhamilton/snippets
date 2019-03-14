@@ -24,6 +24,8 @@ ssh user@1.1.1.1 -p 22 -i ~/.ssh/privatekeyfilenamehere
 
 tags: #mysql #ssh #iterm #port #publickey #privatekey
 
+---
+
 To connect to local MySQL database do:
 
 ```
@@ -39,14 +41,57 @@ show databases;
 use DATABASENAME;
 ```
 
-Then you can run your queries
+Then you can run your queries i.e.
 ```
-select * from contacts;
+SELECT
+	*
+FROM
+	contacts
+WHERE 
+	first_name = 'Ben'
+	AND last_name 'Hamilton';
 ```
+
+---
+
+How many rows are in each table?
+
+```
+SELECT table_name, table_rows FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = "DATABASENAME" ORDER BY table_rows ASC;
+```
+
+---
 
 To remove all rows from a table in MySQL, you can use the truncate command, which is similar to doing a drop table and create table, but quicker and less risky, although there is no undo:
 
 ```
 TRUNCATE tbl_name
 ```
+
+---
+
+Count how many rows are in the job_queue after a certain date:
+```
+select count(id) 
+from job_queue 
+where execute_time > "2018-11-15";
+```
+
+---
+
+Delete rows from the SugarCRM job_queue for all done jobs:
+```
+DELETE FROM job_queue WHERE status = 'DONE';
+```
+
+---
+
+How many distinct values (i.e. unique) are in a column? Useful to know how many dropdown values there are.
+
+```
+SELECT DISTINCT mycolumn FROM mytable
+```
+
+---
+
 
