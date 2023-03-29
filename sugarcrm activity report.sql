@@ -1,4 +1,3 @@
-// sugarcrm activity report
 SELECT 
     Assigned_to AS 'Assigned To',
     start_date AS 'Start Date (UTC+10)',
@@ -7,7 +6,10 @@ SELECT
     Subject,
     Duration,
     ParentType AS 'Parent Type',
-    ParentName AS 'Parent Name'
+    ParentName AS 'Parent Name',
+    Activity_Type AS 'Activity Type',
+    concat(’https://XXXXXXXXXXX.sugarondemand.com/#',Type,'s/',RecordID) as ‘Record Link’#',Type,'s/',RecordID) as 'Record Link'
+    /* change XXXXXXXXXXX in line above to correct instance name */
 FROM
     (SELECT 
         'Meeting' AS 'Type',
@@ -21,6 +23,7 @@ FROM
             meetings.parent_type AS 'ParentType',
             meetings.parent_id AS 'ParentRecordID',
             meetings.deleted AS 'Deleted',
+            meetings_cstm.idx_meeting_type_c AS 'Activity_Type',
             CASE
                 WHEN meetings.parent_type = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN meetings.parent_type = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -29,6 +32,7 @@ FROM
     FROM
         users
     LEFT JOIN meetings ON meetings.assigned_user_id = users.id
+    left join meetings_cstm on meetings_cstm.id_c=meetings.id
     LEFT JOIN accounts ON accounts.id = meetings.parent_id
         AND accounts.deleted = 0
     LEFT JOIN contacts ON contacts.id = meetings.parent_id
@@ -44,6 +48,7 @@ FROM
             meetings.parent_type AS 'ParentType',
             meetings.parent_id AS 'ParentRecordID',
             meetings.deleted AS 'Deleted',
+             meetings_cstm.idx_meeting_type_c AS 'Activity_Type',
             CASE
                 WHEN meetings.parent_type = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN meetings.parent_type = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -53,6 +58,7 @@ FROM
         users
     LEFT JOIN meetings_users ON meetings_users.user_id = users.id
     LEFT JOIN meetings ON meetings.id = meetings_users.meeting_id
+	left join meetings_cstm on meetings_cstm.id_c=meetings.id
     LEFT JOIN accounts ON accounts.id = meetings.parent_id
         AND accounts.deleted = 0
     LEFT JOIN contacts ON contacts.id = meetings.parent_id
@@ -71,6 +77,7 @@ FROM
             calls.parent_type AS 'ParentType',
             calls.parent_id AS 'ParentRecordID',
             calls.deleted AS 'Deleted',
+            'Calls' as 'Activity_Type',
             CASE
                 WHEN calls.parent_type = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN calls.parent_type = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -94,6 +101,7 @@ FROM
             tasks.parent_type AS 'ParentType',
             tasks.parent_id AS 'ParentRecordID',
             tasks.deleted AS 'Deleted',
+             'Tasks' as 'Activity Type',
             CASE
                 WHEN tasks.parent_type = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN tasks.parent_type = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -117,6 +125,7 @@ FROM
             notes.parent_type AS 'ParentType',
             notes.parent_id AS 'ParentRecordID',
             notes.deleted AS 'Deleted',
+            notes_cstm.note_type_c as 'Activity_Type',
             CASE
                 WHEN notes.parent_type = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN notes.parent_type = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -125,6 +134,7 @@ FROM
     FROM
         users
     LEFT JOIN notes ON notes.assigned_user_id = users.id
+    left join notes_cstm on notes_cstm.id_c = notes.id
     LEFT JOIN accounts ON accounts.id = notes.parent_id
         AND accounts.deleted = 0
     LEFT JOIN contacts ON contacts.id = notes.parent_id
@@ -140,6 +150,7 @@ FROM
             emails_beans.bean_module AS 'ParentType',
             emails_beans.bean_id AS 'ParentRecordID',
             emails.deleted AS 'Deleted',
+           'Emails' as 'Activity_Type',
             CASE
                 WHEN emails_beans.bean_module = 'Accounts' THEN CONCAT(IFNULL(accounts.name, ''), ' / ', IFNULL(accounts.account_type, ''))
                 WHEN emails_beans.bean_module = 'Contacts' THEN CONCAT(IFNULL(contacts.first_name, ''), ' ', IFNULL(contacts.last_name, ''), ' / ', IFNULL(contacts.title, ''))
@@ -159,3 +170,4 @@ WHERE
         AND start_date <= LAST_DAY(DATE_SUB(NOW(), INTERVAL 1 MONTH))
         AND u.Deleted = '0'
 ORDER BY Assigned_to ASC , start_date ASC;
+
