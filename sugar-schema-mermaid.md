@@ -2,29 +2,16 @@
 erDiagram
 
 accounts |o--o| accounts_contacts : link
-
 accounts_contacts |o--o| contacts : link
-
 contacts |o--o| opportunities_contacts : link
-
 accounts ||--o{ opportunities : has
-
 opportunities |o--o| opportunities_contacts : link
-
-opportunities ||--|| users : "users"
-
+opportunities ||..|| users : "users"
 opportunities ||--|{ revenue_line_items : "rli has opportunity_id"
-
 revenue_line_items ||--|| accounts : "rli has account_id"
-
-revenue_line_items ||--|| users : "assigned user"
-
-contacts ||--|| users : "assigned user"
-
-accounts ||--|| users : "assigned user"
-
-  
-  
+revenue_line_items ||..|| users : "assigned user"
+contacts ||..|| users : "assigned user"
+accounts ||..|| users : "assigned user"
 
 accounts {
 
