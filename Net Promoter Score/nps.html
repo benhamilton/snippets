@@ -1,0 +1,178 @@
+<html>
+   <head>
+
+   <!-- Embedded CSS -->
+   <style type="text/css">
+      body {
+         font-family: "Helvetica Neue", Helvetica, sans-serif;
+      }
+
+      .container {
+         margin: 80px auto;
+         width: 80%;
+         
+         .widget {
+               span {
+               color: #aaa;
+               font-size: 12px;
+            }
+
+            button {
+               /* padding: 5px 10px; */
+               font-size: 16px;
+               white-space: nowrap;
+               vertical-align: middle;
+               display: inline-block;
+               background: none;
+               border: none;
+               box-shadow: none;
+               cursor: pointer;
+               text-align: center;
+               font-weight: 500;
+               border-radius: 100%;
+               margin: 0;
+               outline: none;
+               margin-left: -1px; 
+               width: 40px;
+               height: 40px;
+               border: 3px solid #eee;
+               transform: scale(1);
+
+               transition: background 0.2s ease-in, 
+                           color 0.2s ease-in,
+                           border-color 0.2s ease-in, 
+                           transform 0.2s cubic-bezier(0.5,2,0.5,0.75);
+
+               &.detractor-hover {
+                  background: #F44336;
+                  color: white;
+                  border-color: lighten(#F44336, 5%);
+                  transform: scale(1.05);
+               }
+
+               &.passive-hover {
+                  background: #F57C00;
+                  color: white;
+                  border-color: lighten(#F57C00, 5%);
+                  transform: scale(1.05);
+               }
+
+               &.promoter-hover {
+                  background: #4CAF50;
+                  color: white;
+                  border-color: lighten(#4CAF50, 5%);
+                  transform: scale(1.05);
+               }
+
+            }
+            
+            &.widget-sm {
+               width: 315px;
+               background: #eee;
+               border: 2px solid #ccc;
+               padding: 15px;
+               box-sizing: border-box;
+               position: relative;
+               padding-bottom: 30px;
+               
+               .positive-text, .negative-text {
+                  position: absolute;
+               }
+               
+               .positive-text {
+                  right: 20px;
+                  bottom: 10px;
+                  text-align: right;
+               }
+               
+               .negative-text {
+                  left: 20px;
+                  bottom: 10px;
+                  text-align: left;
+               }
+               
+               
+               button {
+                  border: none;
+                  margin-left: -3px;
+                  width: 27px;
+                  height: 27px;
+                  font-size: 12px;
+                  font-weight: normal;
+                  transform: scale(1) !important;
+                  /* background-color: #ccc; */
+                  border-radius: none;
+                  text-align: center;
+                  display: inline-block;
+               }
+            }
+         }
+         
+      }
+   </style>
+
+   <!-- javascript -->
+   <script>
+      $('button').hover(function(){
+         var $this = $(this);
+         var $prevAll = $(this).prevAll();
+         
+         var className = $this.attr("class") + "-hover";
+         
+         $this.addClass(className);
+         $prevAll.addClass(className);
+      }, function() {
+         var $this = $(this);
+         var $prevAll = $(this).prevAll();
+         
+         $this.removeClass("detractor-hover passive-hover promoter-hover");
+         $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
+      });
+   </script>
+   </head>
+
+   <body>
+      <p>This example of how you might implement an NPS score on a web form sourced from: <a href="https://codepen.io/bharanim/pen/mVyxKK">https://codepen.io/bharanim/pen/mVyxKK</a>, your milage may vary</p>
+      <p>See also: <a href="https://html.com/input-type-button/">Form button in JavaScript</a>, <a href="https://www.freecodecamp.org/news/how-to-submit-a-form-with-javascript/">Submit form with JavaScript Button</a>, <a href="https://market.apidocs.sugarcrm.com/#961587f3-0374-4b0e-86b8-0f38928cb227">Sugar Market API - Forms</a>, <a href="https://support.sugarcrm.com/Knowledge_Base/Market/Forms_kb/">Sugar Market Help - Forms</a>.
+
+      <hr />
+
+      <div class="container">
+
+         <p>Regular Widget</p>
+         <div class="widget">
+            <button class="detractor">1</button>
+            <button class="detractor">2</button>
+            <button class="detractor">3</button>
+            <button class="detractor">4</button>
+            <button class="detractor">5</button>
+            <button class="passive">6</button>
+            <button class="passive">7</button>
+            <button class="passive">8</button>
+            <button class="promoter">9</button>
+            <button class="promoter">10</button>
+         </div>
+         
+         <br /><br />
+
+         <p>Small Widget</p>
+         <div class="widget widget-sm">
+            <div class="button-container">
+               <span class="negative-text">Unlikely</span>
+               <button class="detractor">1</button>
+               <button class="detractor">2</button>
+               <button class="detractor">3</button>
+               <button class="detractor">4</button>
+               <button class="detractor">5</button>
+               <button class="passive">6</button>
+               <button class="passive">7</button>
+               <button class="passive">8</button>
+               <button class="promoter">9</button>
+               <button class="promoter">10</button>
+               <span class="positive-text">Likely</span>
+              </div>
+         </div>
+         
+      </div>
+   </body>
+</html>
